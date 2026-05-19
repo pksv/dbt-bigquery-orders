@@ -64,7 +64,7 @@ A synthetic e-commerce dataset maintained by Google, available as a native BigQu
 ## dbt project structure
 
 ```
-my_project/
+dbt_project/
 ├── models/
 │   ├── staging/
 │   │   ├── sources.yml                  # thelook_ecommerce source definition
