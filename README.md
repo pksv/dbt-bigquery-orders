@@ -113,7 +113,7 @@ Partition pruning + clustering reduces bytes scanned, keeping queries within the
 
 ## dbt lineage (DAG)
 
-![Lineage Graph](docs/lineage_graph.png)
+![Lineage Graph](dbt_project/docs/lineage_graph.png)
 
 *Raw sources → staging views → intermediate enrichment → gold mart tables*
 
