@@ -1,0 +1,71 @@
+version: 2
+
+models:
+  - name: stg_orders
+    description: "Cleaned and renamed orders from thelook ecommerce"
+    columns:
+      - name: order_id
+        description: "Primary key for orders"
+        data_tests:
+          - unique
+          - not_null
+      - name: user_id
+        data_tests:
+          - not_null
+      - name: status
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Complete', 'Cancelled', 'Returned', 'Processing', 'Shipped']
+
+  - name: stg_users
+    description: "Cleaned users/customers table"
+    columns:
+      - name: user_id
+        data_tests:
+          - unique
+          - not_null
+      - name: email
+        data_tests:
+          - not_null
+
+  - name: stg_order_items
+    description: "Individual line items per order"
+    columns:
+      - name: order_item_id
+        data_tests:
+          - unique
+          - not_null
+      - name: order_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_orders')
+                field: order_id
+      - name: user_id
+        data_tests:
+          - not_null
+
+  - name: stg_products
+    description: "Product catalog with margin calculations"
+    columns:
+      - name: product_id
+        data_tests:
+          - unique
+          - not_null
+
+  - name: stg_inventory_items
+    description: "Inventory items with sold status and days to sell"
+    columns:
+      - name: inventory_item_id
+        data_tests:
+          - unique
+          - not_null
+      - name: product_id
+        data_tests:
+          - not_null
+      - name: is_sold
+        data_tests:
+          - not_null
